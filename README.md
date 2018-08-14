@@ -1,5 +1,13 @@
 # HMI_RTOS
-## 7 colours from RGB
-## User BTN
-### FRDM KL25Z
-### Carlos Miguens
+
+The current version has the follow characteristics:
+
+  - FreeRTOS task for HMI
+  - RGB with 7 colours
+  - User button
+
+## Hardware
+
+  FRDM Board KL25Z
+
+> Carlos Miguens 2018 AUG
