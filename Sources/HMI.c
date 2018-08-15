@@ -83,7 +83,7 @@ char setHMIMsg(int msg, int state)
  *  etc
  */
 
-char showHMIMsg(char msg)
+char showHMIMsg(char msg, int state)
 {
 	switch(msg)
 	{
@@ -91,19 +91,34 @@ char showHMIMsg(char msg)
 		setLed(BLACK);
 		break;
 	case HMI_ERROR:
-		setLed(RED);
+		if (state == LED_ON)
+			setLed(RED);
+		else
+			setLed(BLACK);
 		break;
 	case HMI_ALERT:
-		setLed(BLUE);
+		if (state == LED_ON)
+			setLed(BLUE);
+		else
+			setLed(BLACK);
 		break;
 	case HMI_WAITING:
-		setLed(GREEN);
+		if (state == LED_ON)
+			setLed(GREEN);
+		else
+			setLed(BLACK);
 		break;
 	case HMI_CONNECT:
-		setLed(VIOLET);
+		if (state == LED_ON)
+			setLed(VIOLET);
+		else
+			setLed(BLACK);
 		break;
 	case HMI_OK:
-		setLed(YELLOW);
+		if (state == LED_ON)
+			setLed(YELLOW);
+		else
+			setLed(BLACK);
 		break;
 	default:
 		 setLed(RED);
@@ -113,12 +128,14 @@ char showHMIMsg(char msg)
 	return 0;
 }
 
-char refreshHMIMsg()
+char refreshHMIMsg(int blinkState)
 {
 	for (char msg = 1; msg <= HMI_MSG_SIZE; msg++)
 	{
 		if (hmi_MSG_states[msg] == LED_ON)
-			showHMIMsg(msg);
+			showHMIMsg(msg, 1);
+		if (hmi_MSG_states[msg] == LED_BLINK)
+			showHMIMsg(msg, blinkState);
 	}
 }
 

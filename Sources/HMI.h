@@ -8,6 +8,7 @@
 #ifndef SOURCES_HMI_H_
 #define SOURCES_HMI_H_
 
+#define LED_BLINK 2
 #define LED_OFF   1
 #define LED_ON    0
 
@@ -20,7 +21,6 @@
 #define VIOLET	  6 //red and blue
 #define WHITE	  7 //red, blue and green
 
-#define TIMETOSHINE 5000 // mili seconds
 // user modes to show
 #define HMI_MSG_SIZE 5
 #define HMI_LEDSOFF	0
@@ -31,10 +31,13 @@
 #define HMI_OK		5
 
 #define HMITaskPeriod 100
+#define TIMETOSHINE 20000 // mili seconds
+#define TIMETOBLINK 200 // mili seconds
+#define TIMETOSPECIALMODE 5000
 
 void clearLeads();
-char refreshHMIMsg();
+char refreshHMIMsg(int blinkState);
 char setHMIMsg(int msg, int timeToShine);  // user function to set msg
-char showHMIMsg(char msg); // set leds to show a msg
+char showHMIMsg(char msg, int state); // set leds to show a msg
 
 #endif /* SOURCES_HMI_H_ */

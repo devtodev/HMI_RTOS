@@ -31,14 +31,14 @@ static portTASK_FUNCTION(AnotherTask, pvParameters) {
 		setHMIMsg(msgid, LED_OFF);
 		msgid++;
 		msgid = ((msgid>=HMI_MSG_SIZE) || (msgid<0)) ? 1 : msgid;
-		setHMIMsg(msgid, LED_ON);
-		vTaskDelay(1000/portTICK_RATE_MS);
+		setHMIMsg(msgid, LED_BLINK);
+		vTaskDelay(2000/portTICK_RATE_MS);
 	}
 	vTaskDelete(AnotherTask);
 }
 
 static portTASK_FUNCTION(HMITask, pvParameters) {
-	int timeToShine = 0;
+	int timeToShine = 0, blink = 0, pressedButtonTime = 0;
 	// Button is reading in a task instead of an interrupt
 	// for avoid trigger an interrupt using the Button
 	// and letting the scheduler admin the MCU time
@@ -47,16 +47,28 @@ static portTASK_FUNCTION(HMITask, pvParameters) {
 		// Push the button to show the current msgs
 		if (Button_GetVal() == 0) {
 			// TODO: sense de time pressed in order to enter into a special mode.
-			timeToShine = TIMETOSHINE;
+			pressedButtonTime = (pressedButtonTime > TIMETOSPECIALMODE)?TIMETOSPECIALMODE:pressedButtonTime + HMITaskPeriod; // to avoid overflows
+			if (pressedButtonTime >= TIMETOSPECIALMODE)
+			{
+				// Enter to special mode
+				// in this example the action is turn off the leds
+				timeToShine = 0;
+				setHMIMsg(HMI_LEDSOFF, 0); // turn off the leds
+			}
+		} else {
+			if ((pressedButtonTime > 0) && (pressedButtonTime < TIMETOSPECIALMODE)) {
+				timeToShine = TIMETOSHINE;
+			}
+			pressedButtonTime = 0;
 		}
 
 		if (timeToShine > 0) {
-			refreshHMIMsg();
+			refreshHMIMsg((blink > 0)?LED_ON:LED_OFF);
+			blink = (blink < 0-TIMETOBLINK)?TIMETOBLINK:blink-HMITaskPeriod;
 			timeToShine = timeToShine-HMITaskPeriod;
 			if (timeToShine <= 0)
 				setHMIMsg(HMI_LEDSOFF, 0); // turn off the leds
 		}
-
 
 		vTaskDelay(HMITaskPeriod/portTICK_RATE_MS);
 
