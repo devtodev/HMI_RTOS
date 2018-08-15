@@ -5,4 +5,3 @@
  * 7 colours from RGB
 
 Hardware FRDM KL25Z
-Author Carlos Miguens
