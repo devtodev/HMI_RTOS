@@ -9,46 +9,123 @@
 #include "LED_Red.h"
 #include "LED_Green.h"
 #include "LED_Blue.h"
+#include "Button.h"
 
-char red = LED_OFF, green = LED_OFF, blue = LED_OFF;
+int hmi_MSG_states[HMI_MSG_SIZE+1];
 
 void setLed(char color)
 {
-	red = LED_OFF;
-	green = LED_OFF;
-	blue = LED_OFF;
-
 	switch(color)
 	{
 		case RED:
-			red = LED_ON;
+			LED_Red_PutVal(LED_ON);
+			LED_Blue_PutVal(LED_OFF);
+			LED_Green_PutVal(LED_OFF);
 			break;
 		case GREEN:
-			green = LED_ON;
+			LED_Red_PutVal(LED_OFF);
+			LED_Blue_PutVal(LED_OFF);
+			LED_Green_PutVal(LED_ON);
 			break;
 		case BLUE:
-			blue = LED_ON;
+			LED_Red_PutVal(LED_OFF);
+			LED_Blue_PutVal(LED_ON);
+			LED_Green_PutVal(LED_OFF);
 			break;
 		case TURQUOISE:
-			blue = LED_ON;
-			green = LED_ON;
+			LED_Red_PutVal(LED_OFF);
+			LED_Blue_PutVal(LED_ON);
+			LED_Green_PutVal(LED_ON);
 			break;
 		case YELLOW:
-			red = LED_ON;
-			green = LED_ON;
+			LED_Red_PutVal(LED_ON);
+			LED_Blue_PutVal(LED_OFF);
+			LED_Green_PutVal(LED_ON);
 			break;
 		case VIOLET:
-			red = LED_ON;
-			blue = LED_ON;
+			LED_Red_PutVal(LED_ON);
+			LED_Blue_PutVal(LED_ON);
+			LED_Green_PutVal(LED_OFF);
 			break;
 		case WHITE:
-			red = LED_ON;
-			blue = LED_ON;
-			green = LED_ON;
+			LED_Red_PutVal(LED_ON);
+			LED_Blue_PutVal(LED_ON);
+			LED_Green_PutVal(LED_ON);
+			break;
+		case BLACK:
+			LED_Red_PutVal(LED_OFF);
+			LED_Blue_PutVal(LED_OFF);
+			LED_Green_PutVal(LED_OFF);
 			break;
 	}
+}
 
-	LED_Red_PutVal(red);
-	LED_Blue_PutVal(blue);
-	LED_Green_PutVal(green);
+// set msg into the state msg array
+char setHMIMsg(int msg, int state)
+{
+	if (msg == HMI_LEDSOFF) {
+		setLed(BLACK);
+	} else {
+		hmi_MSG_states[msg] = state;
+	}
+
+}
+
+/*
+ * Msgs to show in LEDs
+ *
+	HMI_LEDSOFF
+	HMI_ERROR
+	HMI_ALER
+	HMI_CONNECT
+	HMI_WAITING
+	HMI_OK
+ *  etc
+ */
+
+char showHMIMsg(char msg)
+{
+	switch(msg)
+	{
+	case HMI_LEDSOFF:
+		setLed(BLACK);
+		break;
+	case HMI_ERROR:
+		setLed(RED);
+		break;
+	case HMI_ALERT:
+		setLed(BLUE);
+		break;
+	case HMI_WAITING:
+		setLed(GREEN);
+		break;
+	case HMI_CONNECT:
+		setLed(VIOLET);
+		break;
+	case HMI_OK:
+		setLed(YELLOW);
+		break;
+	default:
+		 setLed(RED);
+		return 1;
+		break;
+	}
+	return 0;
+}
+
+char refreshHMIMsg()
+{
+	for (char msg = 1; msg <= HMI_MSG_SIZE; msg++)
+	{
+		if (hmi_MSG_states[msg] == LED_ON)
+			showHMIMsg(msg);
+	}
+}
+
+void clearLeads()
+{
+	for (char msg = 1; msg <= HMI_MSG_SIZE; msg++)
+	{
+		hmi_MSG_states[msg] = LED_OFF;
+	}
 }

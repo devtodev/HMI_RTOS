@@ -181,13 +181,13 @@ registers of the peripheral(s) configured by the component.
 \code
 **          Component name                                 : BitIoLdd3
 **          Pin for I/O                                    : ADC0_SE5b/PTD1/SPI0_SCK/TPM0_CH1
-**          Pin signal                                     : 
-**          Direction                                      : Input/Output
+**          Pin signal                                     : LED_BLUE
+**          Direction                                      : Output
 **          Initialization                                 : 
 **            Init. direction                              : Output
 **            Init. value                                  : 0
 **            Auto initialization                          : yes
-**          Safe mode                                      : no
+**          Safe mode                                      : yes
 <h1>
 \endcode
 */

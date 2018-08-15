@@ -6,8 +6,8 @@
 C_SRCS += \
 ../Generated_Code/BitIoLdd1.c \
 ../Generated_Code/BitIoLdd2.c \
-../Generated_Code/BitIoLdd3.c \
 ../Generated_Code/BitIoLdd4.c \
+../Generated_Code/BitIoLdd5.c \
 ../Generated_Code/Button.c \
 ../Generated_Code/Cpu.c \
 ../Generated_Code/FRTOS1.c \
@@ -37,8 +37,8 @@ C_SRCS += \
 OBJS += \
 ./Generated_Code/BitIoLdd1.o \
 ./Generated_Code/BitIoLdd2.o \
-./Generated_Code/BitIoLdd3.o \
 ./Generated_Code/BitIoLdd4.o \
+./Generated_Code/BitIoLdd5.o \
 ./Generated_Code/Button.o \
 ./Generated_Code/Cpu.o \
 ./Generated_Code/FRTOS1.o \
@@ -68,8 +68,8 @@ OBJS += \
 C_DEPS += \
 ./Generated_Code/BitIoLdd1.d \
 ./Generated_Code/BitIoLdd2.d \
-./Generated_Code/BitIoLdd3.d \
 ./Generated_Code/BitIoLdd4.d \
+./Generated_Code/BitIoLdd5.d \
 ./Generated_Code/Button.d \
 ./Generated_Code/Cpu.d \
 ./Generated_Code/FRTOS1.d \
@@ -101,7 +101,7 @@ C_DEPS += \
 Generated_Code/%.o: ../Generated_Code/%.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: Cross ARM C Compiler'
-	arm-none-eabi-gcc -mcpu=cortex-m0plus -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -I"/home/karl/workspace.kds/HMI_RTOS/Static_Code/PDD" -I"/home/karl/workspace.kds/HMI_RTOS/Static_Code/IO_Map" -I"/home/karl/workspace.kds/HMI_RTOS/Sources" -I"/home/karl/workspace.kds/HMI_RTOS/Generated_Code" -std=c99 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" -c -o "$@" "$<"
+	arm-none-eabi-gcc -mcpu=cortex-m0plus -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -I"/home/karl/workspace.kds/HMI_task_FreeRTOS/Static_Code/PDD" -I"/home/karl/workspace.kds/HMI_task_FreeRTOS/Static_Code/IO_Map" -I"/home/karl/workspace.kds/HMI_task_FreeRTOS/Sources" -I"/home/karl/workspace.kds/HMI_task_FreeRTOS/Generated_Code" -std=c99 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" -c -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

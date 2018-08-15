@@ -1,10 +1,10 @@
 /* ###################################################################
 **     Filename    : main.c
-**     Project     : HMI_RTOS
+**     Project     : HMI_task_FreeRTOS
 **     Processor   : MKL25Z128VLK4
 **     Version     : Driver 01.01
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2018-08-14, 04:37, # CodeGen: 0
+**     Date/Time   : 2018-08-14, 14:17, # CodeGen: 0
 **     Abstract    :
 **         Main module.
 **         This module contains user's application code.
@@ -30,18 +30,18 @@
 /* Including needed modules to compile this module/procedure */
 #include "Cpu.h"
 #include "Events.h"
-#include "LED_Green.h"
-#include "BitIoLdd1.h"
+#include "FRTOS1.h"
 #include "LED_Red.h"
+#include "BitIoLdd5.h"
+#include "BitIoLdd1.h"
+#include "LED_Green.h"
 #include "BitIoLdd2.h"
 #include "LED_Blue.h"
-#include "BitIoLdd3.h"
-#include "FRTOS1.h"
-#include "MCUC1.h"
-#include "UTIL1.h"
-#include "TSK1.h"
 #include "Button.h"
 #include "BitIoLdd4.h"
+#include "TSK1.h"
+#include "MCUC1.h"
+#include "UTIL1.h"
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
 #include "PE_Error.h"

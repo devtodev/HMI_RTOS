@@ -46,19 +46,19 @@ endif
 # Add inputs and outputs from these tool invocations to the build variables 
 
 # All Target
-all: HMI_RTOS.elf secondary-outputs
+all: HMI_task_FreeRTOS.elf secondary-outputs
 
 # Tool invocations
-HMI_RTOS.elf: $(OBJS) $(USER_OBJS)
+HMI_task_FreeRTOS.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: Cross ARM C++ Linker'
-	arm-none-eabi-g++ -mcpu=cortex-m0plus -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -T "/home/karl/workspace.kds/HMI_RTOS/Project_Settings/Linker_Files/ProcessorExpert.ld" -Xlinker --gc-sections -L"/home/karl/workspace.kds/HMI_RTOS/Project_Settings/Linker_Files" -Wl,-Map,"HMI_RTOS.map" -specs=nano.specs -specs=nosys.specs -o "HMI_RTOS.elf" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-none-eabi-g++ -mcpu=cortex-m0plus -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -T "/home/karl/workspace.kds/HMI_task_FreeRTOS/Project_Settings/Linker_Files/ProcessorExpert.ld" -Xlinker --gc-sections -L"/home/karl/workspace.kds/HMI_task_FreeRTOS/Project_Settings/Linker_Files" -Wl,-Map,"HMI_task_FreeRTOS.map" -specs=nano.specs -specs=nosys.specs -o "HMI_task_FreeRTOS.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(C++_DEPS)$(OBJS)$(C_DEPS)$(ASM_DEPS)$(CC_DEPS)$(CPP_DEPS)$(CXX_DEPS)$(C_UPPER_DEPS)$(S_UPPER_DEPS) HMI_RTOS.elf
+	-$(RM) $(C++_DEPS)$(OBJS)$(C_DEPS)$(ASM_DEPS)$(CC_DEPS)$(CPP_DEPS)$(CXX_DEPS)$(C_UPPER_DEPS)$(S_UPPER_DEPS) HMI_task_FreeRTOS.elf
 	-@echo ' '
 
 secondary-outputs:

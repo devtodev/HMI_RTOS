@@ -4,13 +4,13 @@
 /*##                                   */
 /*##     Filename  : ProcessorExpert.ld */
 /*##                                   */
-/*##     Project   : HMI_RTOS          */
+/*##     Project   : HMI_task_FreeRTOS */
 /*##                                   */
 /*##     Processor : MKL25Z128VLK4     */
 /*##                                   */
 /*##     Compiler  : GNU C Compiler    */
 /*##                                   */
-/*##     Date/Time : 2018-08-14, 04:37, # CodeGen: 0 */
+/*##     Date/Time : 2018-08-14, 14:17, # CodeGen: 0 */
 /*##                                   */
 /*##     Abstract  :                   */
 /*##                                   */
